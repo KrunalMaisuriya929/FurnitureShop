@@ -54,13 +54,19 @@ struct HomeScreenView: View {
                                     NavigationLink(
                                         destination: DetailScreenView(),
                                         label: {
-                                            
+                                            ProductCardView(image: Image("chair_\(i+1)"), size: 210)
                                         })
+                                    .toolbar(.hidden, for:.navigationBar)
+                                    .foregroundColor(.black)
                                 }
+                                .padding(.leading)
                             }
                         }
                         .padding(.bottom)
                         
+                        Text("Best")
+                            .font(.custom("PlayfairDisplay-Bold", size: 24))
+                            .padding(.horizontal)
                         
                     }
                     
@@ -162,4 +168,37 @@ struct CategoryView: View {
         }
         .padding(.trailing)
     }
+}
+
+struct ProductCardView: View {
+    var image: Image
+    var size: CGFloat
+    
+    var body: some View {
+        VStack{
+            image
+                .resizable()
+                .frame(width: size, height: 200 * (size/210))
+                .clipShape(.rect(cornerRadius: 20))
+                
+            Text("Luxury Swedian Chair")
+                .font(.title3)
+                .fontWeight(.bold)
+            
+            HStack(spacing: 2){
+                ForEach(0 ..< 5){ item in
+                    Image("Star")
+                }
+                Spacer()
+                Text("$1299")
+                    .font(.title3)
+                    .fontWeight(.bold)
+            }
+        }
+        .frame(width: size)
+        .padding()
+        .background(Color.white)
+        .clipShape(.rect(cornerRadius: 20))
+    }
+    
 }
