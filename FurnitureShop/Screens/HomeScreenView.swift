@@ -68,10 +68,23 @@ struct HomeScreenView: View {
                             .font(.custom("PlayfairDisplay-Bold", size: 24))
                             .padding(.horizontal)
                         
+                        ScrollView(.horizontal, showsIndicators: false){
+                            HStack(spacing: 0){
+                                ForEach(0 ..< 4) { i in
+                                    ProductCardView(image: Image("chair_\(4-i)"), size: 180)
+                                }
+                                .padding(.leading)
+                            }
+                        }
+                        
                     }
                     
                 }//scrollView
                 
+                VStack{
+                    Spacer()
+                    BottomNavBarView()
+                }
                 
             }
             
@@ -201,4 +214,35 @@ struct ProductCardView: View {
         .clipShape(.rect(cornerRadius: 20))
     }
     
+}
+
+struct BottomNavBarView: View {
+    
+    
+    var body: some View {
+        HStack{
+            BottomNavBarItem(action: {}, image: Image("home"))
+            BottomNavBarItem(action: {}, image: Image("fav"))
+            BottomNavBarItem(action: {}, image: Image("shop"))
+            BottomNavBarItem(action: {}, image: Image("user"))
+        }
+        .padding()
+        .background(Color.white)
+        .clipShape(Capsule())
+        .padding(.horizontal)
+        .shadow(color: Color.blue.opacity(0.15), radius: 8, x: 2, y:6)
+    }
+}
+
+struct BottomNavBarItem : View{
+    
+    let action : () -> Void
+    let image : Image
+    
+    var body: some View {
+        Button(action: action, label: {
+            image
+                .frame(maxWidth: .infinity)
+        })
+    }
 }
