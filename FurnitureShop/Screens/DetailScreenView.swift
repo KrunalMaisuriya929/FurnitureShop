@@ -49,8 +49,34 @@ struct DetailScreenView: View {
             .edgesIgnoringSafeArea(.bottom)
             
         }
-        .toolbar(.automatic, for: .navigationBar)
-        .navigationBarItems(leading: BackButton(action: {presentationMode.wrappedValue.dismiss()}), trailing: Image("threeDot"))
+//        .toolbar(.hidden, for: .navigationBar)
+//        .navigationBarItems(leading: BackButton(action: {presentationMode.wrappedValue.dismiss()}), trailing: Image("threeDot"))
+        .navigationBarBackButtonHidden(true)
+        .toolbar{
+//            ToolbarItemGroup{
+//                BackButton(action: {
+//                    presentationMode.wrappedValue.dismiss()
+//                })
+//                
+//                Spacer()
+//                Image("threeDot")
+//            }
+            ToolbarItemGroup(placement: .topBarLeading, content: {
+                BackButton(action: {
+                    presentationMode.wrappedValue.dismiss()
+                })
+            })
+            
+            ToolbarItemGroup(placement: .topBarTrailing, content: {
+                Image("threeDot")
+            })
+            
+//            ToolbarItem(placement: .navigationBarLeading) {
+//                BackButton(action: {
+//                    presentationMode.wrappedValue.dismiss()
+//                })
+//            }
+        }
       
             
     }
